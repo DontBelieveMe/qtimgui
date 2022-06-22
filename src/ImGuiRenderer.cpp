@@ -82,9 +82,10 @@ void ImGuiRenderer::initialize(WindowWrapper *window) {
     io.BackendPlatformName = "qtimgui";
     
     // Setup keyboard mapping
-    for (ImGuiKey key : keyMap.values()) {
-        io.KeyMap[key] = key;
-    }
+    //for (ImGuiKey key : keyMap.values()) {
+    //    io.KeyMap[key] = key;
+    //    io.AddKeyEvent()
+    //}
     
     // io.RenderDrawListsFn = [](ImDrawData *drawData) {
     //    instance()->renderDrawList(drawData);
@@ -432,7 +433,9 @@ void ImGuiRenderer::onKeyPressRelease(QKeyEvent *event)
     const auto key_it = keyMap.constFind( event->key() );
     if (key_it != keyMap.constEnd()) { // Qt's key found in keyMap
         const int imgui_key = *(key_it);
-        io.KeysDown[imgui_key] = key_pressed;
+        //io.KeysDown[imgui_key] = key_pressed;
+
+        io.AddKeyEvent(imgui_key, key_pressed);
     }
 
     if (key_pressed) {
